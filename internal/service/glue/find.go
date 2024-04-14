@@ -126,6 +126,20 @@ func FindTriggerByName(ctx context.Context, conn *glue.Glue, name string) (*glue
 	return output, nil
 }
 
+// FindCustomEntityTypeByName returns the CustomEntityType corresponding to the specified name.
+func FindCustomEntityTypeByName(ctx context.Context, conn *glue.Glue, name string) (*glue.GetCustomEntityTypeOutput, error) {
+	input := &glue.GetCustomEntityTypeInput{
+		Name: aws.String(name),
+	}
+
+	output, err := conn.GetCustomEntityTypeWithContext(ctx, input)
+	if err != nil {
+		return nil, err
+	}
+
+	return output, nil
+}
+
 // FindRegistryByID returns the Registry corresponding to the specified ID.
 func FindRegistryByID(ctx context.Context, conn *glue.Glue, id string) (*glue.GetRegistryOutput, error) {
 	input := &glue.GetRegistryInput{
